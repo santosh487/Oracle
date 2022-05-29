@@ -1,0 +1,127 @@
+PL/SQL Block
+
+DECLARE
+	variables,cursors, procedures, functions, trigger, assertions etc
+BEGIN
+	SQL statements, control structures, etc
+EXCEPTION
+	Exception Handling statements
+END;
+/
+------ Variable
+Global
+Local
+
+variable_name [CONSTANT] datatype(size) := initialization_value;
+
+sales number(10,2) := 40
+------------------------------
+Variable Anchor
+	%TYPE
+
+
+----------------Subtypes
+
+
+--------------------------------------------	
+SELECT ... INTO... => to assign a value to a variable
+
+-------------------------------------------------------
+Conditions
+	IF-THEN statement
+	IF-THEN-ELSE statement
+	IF-THEN-ELSEIF statement
+	CASE statement
+	Searched CASE statement
+	nested IF-THEN-ELSE
+	
+---------------------------------------------------------------	
+Loop TYPE
+	PL/SQL Basic LOOP 
+	PL/SQL WHILE LOOP
+	PL/SQL FOR LOOP
+	Nested loops in PL/SQL
+---------------------------------------------------------------	
+LOOP
+	Sequence of statements
+END LOOP
+---------------The loop control statement
+	EXIT statement
+	CONTINUE statement
+	GOTO statement
+	
+------String in PL/SQL
+	Fixed-length
+	Variable-length
+	Character large objects
+
+--------------- Array
+CREATE OR REPLACE TYPE namearray IS VARRAY (3) OF VARCHAR2(10);
+	ex: TYPE namearray IS VARRAY(5) OF VARCHAR2(20);
+		TYPE grades IS VARRAY(5) OF INTEGER;
+		
+--------Procedure
+	IN parameters
+	OUT parameters
+	INOT parameters
+	
+CREATE [OR REPLACE] PROCEDURE procedure_name
+	[(parameter[,parameter])]
+IS
+	[declaration_section]
+BEGIN
+	executable_section
+[EXCEPTION
+	exception_section]
+END [procedure_names]	
+
+
+-------------Function
+CREATE [OR REPLACE] FUNCTION function_name[parameter]
+[(parameter_name [IN | OUT | IN OUT] type[,....])]
+RETURN return_dattype
+{IS|AS}
+BEGIN
+	<function_body>
+END
+
+---------------------
+When an SQL statement is processed, Oracle creates a memory area knows as context area.
+
+A cursor is a pointer to this context area. 
+It contains  all information needed for processing the statement
+
+In PL/SQL, the context area is controlled  by Cursor
+
+A cursor contains information on select statement and the rows of data accessed by it .
+
+A cursor is used to referred to a program to fetch and process the rows 
+returned by the SQL statement, one at a time.
+
+
+Types:
+	Implicit Cursors
+
+	Explicit Cursors
+	eg: 	
+	Declare the cursor
+		CURSOR cursor_name IS select statement;
+	Open the cursor
+		OPEN cursor_name;
+	Fetch the cursor
+		FETCH cursor_name INTO variable_list;
+	Close the cursor
+		CLOSE cursor_name;
+		
+	
+	
+DML Statement => INSERT, UPDATE, DELETE
+
+Attribute
+	%FOUND
+	%NOTFOUND
+	%ISOPEN
+	%ROWCOUNT
+	
+--------------------------------------------
+	
