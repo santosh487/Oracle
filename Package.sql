@@ -18,3 +18,13 @@ END manage_employees;
 
 EXEC manage_employees.add_emp(101,'santosh');
 EXEC manage_employees.edit_emp(501,'khadka');
+
+
+CREATE OR REPLACE PACKAGE global_constant IS
+  mile_to_km CONSTANT NUMBER := 1.6093;
+  km_to_mile CONSTANT NUMBER := 0.6214;
+END global_constant;
+/
+
+EXEC Dbms_Output.put_line('The total km is: '||20 * global_constant.mile_to_km);
+EXEC Dbms_Output.put_line('The total mile is: '||20 * global_constant.km_to_mile);
