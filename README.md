@@ -4,10 +4,21 @@ Basic PL/SQL
         
         
 Conditional Statements
+
 Loops
+
+
 Cursors
+
+
 Exception Handling
+
+
 Procedure
+
+
 Functions
+
 Package
+
 Triggers
