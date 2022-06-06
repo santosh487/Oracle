@@ -1,0 +1,6 @@
+CREATE DATABASE LINK <dblink_name>
+CONNECT TO <Username OR SCHEMA Name>
+IDENTIFIED BY <Password>
+USING 'ORACLE_SID';
+
+SELECT * FROM <table_name>@dblink1;
