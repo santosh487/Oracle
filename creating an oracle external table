@@ -1,0 +1,15 @@
+create directory foler1 as 'D:\loader';
+grant read,write on directory foler1 to schema_user1;
+
+
+CREATE TABLE languages(
+    language_id INT,
+    language_name VARCHAR2(30)
+)
+ORGANIZATION EXTERNAL(
+    TYPE oracle_loader
+    DEFAULT DIRECTORY foler1
+    ACCESS PARAMETERS 
+    (FIELDS TERMINATED BY ',')
+    LOCATION ('languages.csv')
+);
