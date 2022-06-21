@@ -1,0 +1,9 @@
+--hr.par
+userid=hr@orcl/hr
+directory=folder_datapump
+dumpfile=email_exp%U.dmp
+logfile=email_exp.log
+schemas=hr
+or tables=emails
+-----------
+D:\loader\Data Pump\Export>expdp parfile=hr.par
