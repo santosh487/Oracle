@@ -16,3 +16,24 @@ fields terminated by ","
 )
 ------------
 D:\loader\loader tools>sqlplus hr/hr@orcl
+
+---------------------------------------------------------------------------------
+--email.ctl
+load data into table emails
+insert 
+fields terminated by ","
+(
+    email_id,
+    email
+)
+
+--------email.par
+USERID=hr/hr@orcl
+CONTROL=email.ctl
+LOG=email.log
+BAD=email.bad
+DATA=D:/loader/email.dat
+DIRECT=true
+
+----finally loaded data 
+D:\loader\loader tools>sqlldr parfile=email.par
