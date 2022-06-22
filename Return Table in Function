@@ -1,0 +1,30 @@
+SELECT * FROM hr.employees;
+
+CREATE OR REPLACE TYPE t_record AS object (
+  employee_id NUMBER,
+  first_name VARCHAR2(30),
+  last_name VARCHAR2(30),
+  salary NUMBER
+);
+/
+
+CREATE OR REPLACE TYPE t_table AS TABLE OF t_record;
+/
+
+CREATE OR REPLACE FUNCTION return_tables( is_active IN NUMBER)
+RETURN t_table AS
+    v_ret   t_table;
+BEGIN
+     IF is_active=1 THEN
+      SELECT 
+        t_record(employee_id, first_name,last_name,salary)
+      BULK COLLECT INTO
+        v_ret
+      FROM  hr.employees;
+    END IF;
+    RETURN v_ret;
+  
+END return_tables;
+
+SELECT * FROM TABLE(return_tables(1));
+
