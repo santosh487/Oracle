@@ -1,0 +1,25 @@
+SELECT * FROM hr.employees;
+
+create or replace procedure application_test(is_active NUMBER)
+is 
+employee_id  NUMBER ;
+first_name   VARCHAR2(100) ;
+last_name   VARCHAR2(100);
+CURSOR cust_cursor1 is 
+     SELECT employee_id, first_name,last_name FROM hr.employees;
+begin 
+ OPEN cust_cursor1;
+ IF is_active = 1 THEN  
+   LOOP
+  FETCH cust_cursor1 into   employee_id, first_name, last_name; 
+  EXIT WHEN cust_cursor1%notfound; 
+     dbms_output.put_line(employee_id || ' ' || first_name || ' ' || last_name); 
+  END LOOP; 
+  END IF ;
+  CLOSE cust_cursor1; 
+END;  
+/     
+    
+exec application_test(2);
+
+
