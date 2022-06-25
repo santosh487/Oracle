@@ -1,0 +1,12 @@
+Rman> backup database plus archivelog;
+Full backup
+Rman> backup database;
+Only tablespace 
+Rman> backup tablespace abc;
+Only datafile
+Rman>backup datafile 3;
+cumulative backup 
+Rman>
+backup incremental level 0 database ;
+differential backup
+Rman>backup incremental level 1 database
