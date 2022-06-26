@@ -1,3 +1,5 @@
+set oracle_sid = orcl
+
 sqlplus / as sysdba
 shutdown immediate
 startup mount
