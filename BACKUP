@@ -10,3 +10,35 @@ Rman>
 backup incremental level 0 database ;
 differential backup
 Rman>backup incremental level 1 database
+
+
+-------Backup of 
+	Control File
+	Archive Log
+	Backup set
+Image copies 
+	are exact byte-for-byte copies of files
+
+Rman> report schema => list of datafiles
+rman> list backup; => list of backup sets
+
+
+SQL>show parameter db_recover 
+SQL> alter system set db_recover_file_dest = "D:\backup";
+
+Crosscheck backup => use to check the status of backupsets and image copies
+Report obsolete backup => use to view obsolete backups
+list expired Backup => use to view expired backups
+delete expired backup or delete obsolete
+
+--------------------------------------------
+RMAN> report schema; => Showing all datafile
+RMAN> list copy of datafile 1 => showing copy datafile
+RMAN> copy backup to "D:\f1.dbf"; => Copy backup file another location
+-------------------------------------------------
+RMAN> delete exipred backup
+RMAN> delete exipred copy
+
+--------------------
+RMAN> report obsolete;
+RMAN> delete obsolete;
