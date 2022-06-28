@@ -1,0 +1,31 @@
+CREATE OR REPLACE PROCEDURE get_record (
+  department_id    IN  NUMBER ,
+  department_name IN  VARCHAR2,
+  rec          OUT VARCHAR2
+)
+IS
+  query VARCHAR2(4000);
+BEGIN
+  query := 'SELECT department_name FROM  hr.departments WHERE department_id='''
+           || department_id 
+           || ''' OR department_name=''' 
+           || department_name 
+           || '''';
+
+  EXECUTE IMMEDIATE query INTO rec ;
+  DBMS_OUTPUT.PUT_LINE('Rec: ' || rec );
+END;
+/
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+  record_value VARCHAR2(100);
+BEGIN
+  get_record(20, '', record_value);
+END;
+/
+
+
+
+EXEC  get_record(10, 'Administration', record_value); 
