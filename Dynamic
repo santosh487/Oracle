@@ -1,0 +1,15 @@
+DECLARE 
+cursor rec is 
+        select * from all_objects 
+        where owner='SYS' and object_type in 
+        ('TABLE','MATERIALIZED VIEW','VIEW','PROCEDURE','FUNCTION','Indexes',
+        'Packages','Triggers','Sequences','Synonmys','Database Links');
+begin
+  for i in rec loop
+     begin 
+     DBMS_OUTPUT.PUT_LINE('create'||i.object_type||' '||i.object_name||' as select * from '||i.object_name||'@link_for_uat');
+--     execute immediate 'create'||i.object_type||' '||i.object_name||' as select * from '||i.object_name||'@link_for_uat';
+     end;
+   end loop;
+end;
+
