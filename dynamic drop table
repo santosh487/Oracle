@@ -1,0 +1,12 @@
+CREATE OR REPLACE PROCEDURE drop_it (kind IN VARCHAR2, name IN
+VARCHAR2)
+AUTHID CURRENT_USER
+AS
+BEGIN
+   EXECUTE IMMEDIATE 'DROP ' || kind || ' ' || name;
+END;
+/
+
+CREATE TABLE test1 (id number);
+SELECT * FROM test1;
+EXEC drop_it('table','test1')
