@@ -1,0 +1,6 @@
+CREATE PROCEDURE fire_employee (emp_id NUMBER) AS
+BEGIN
+   EXECUTE IMMEDIATE
+      'DELETE FROM hr.employees WHERE employee_id = :num' USING emp_id;
+END;
+/
