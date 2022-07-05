@@ -19,7 +19,6 @@ begin
   CLOSE cust_cursor1; 
 END;  
 /     
-    
 exec application_test(2);
 
 
