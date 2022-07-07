@@ -1,0 +1,37 @@
+
+create or replace procedure Pro_Tri_Cre( P_TRIGGER_NAME IN VARCHAR2)
+is
+v_statement varchar2(32767);
+BEGIN
+ v_statement := 'CREATE OR REPLACE trigger audit_'||P_TRIGGER_NAME||' BEFORE INSERT OR DELETE OR UPDATE ON  hr.'||P_TRIGGER_NAME||
+     ' FOR EACH ROW
+      ENABLE
+      DECLARE
+        v_user varchar2 (30);
+        v_date  varchar2(30);
+      BEGIN
+        SELECT user, sysdate INTO v_user, v_date  FROM dual;
+        IF INSERTING THEN
+          INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation)
+          VALUES(NULL, Null , v_user, v_date, '||'INSERT'||');
+        ELSIF DELETING THEN
+          INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation)
+          VALUES(NULL,NULL, v_user, v_date, '||'Delete'||');
+        ELSIF UPDATING THEN
+          INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation)
+          VALUES(NULL, NULL, v_user, v_date,'||'Update'||');
+        END IF;
+      END;
+      /';
+
+ dbms_output.put_line(v_statement);
+EXECUTE IMMEDIATE v_statement;
+exception when others then dbms_output.put_line(sqlerrm);
+End;
+
+EXEC    Pro_Tri_Cre( 'departments');
+
+SELECT * FROM hr.departments;
+ select * from all_objects
+        where owner='SYS' and object_type in
+        ('TRIGGER');
