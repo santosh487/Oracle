@@ -32,11 +32,9 @@ BEGIN
 END;
 /
 
-
 SELECT *  FROM hr.employees;
 INSERT INTO hr.employees VALUES  (900,'Santosh','Khadka','khadka@gmail.com','9869320238',current_date,'AD_VP',22000,0.5,NULL,NULL );
 UPDATE hr.employees SET first_name = 'Ram' WHERE employee_id=900;
 DELETE FROM hr.employees WHERE employee_id=900;
-
 
 SELECT * FROM sh_audit;
