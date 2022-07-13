@@ -1,14 +1,10 @@
 --Database Trigger
-
 CREATE OR REPLACE TRIGGER trigger_name
 {BEFORE|AFTER|INSTEAD OF}
 {INSERT [OR] UPDATE[OR]DELETE}
 [OF col_name]
 ON table_name
---[Referencing OLD AS o NEW AS  n]
-
 [FOR EACH ROW]
-
 BEGIN
 	Executable-STATEMENT
 EXCEPTION
