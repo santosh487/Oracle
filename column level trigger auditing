@@ -1,0 +1,93 @@
+
+create table emp(
+emp_id int,
+first_name varchar2(30),
+last_name VARCHAR2(30)
+);
+
+INSERT INTO emp VALUES (1,'santosh','khadka');
+INSERT INTO emp VALUES (2,'suraj','maharjana'); 
+INSERT INTO emp VALUES (3,'umesh','chalise');
+SELECT * FROM emp; 
+------------------------------------------------------------------------------
+create table dept(
+dept_id int,
+dept_name varchar2(30)
+);
+
+INSERT INTO dept VALUES (1,'Database');
+INSERT INTO dept VALUES (2,'Java');
+SELECT * FROM dept;
+-------------------------------------------------------------------------------------
+create table loc(
+loc_id varchar2(30),
+loc_name varchar2(30)
+);
+
+INSERT INTO loc VALUES (1,'Nepalgunj');
+INSERT INTO loc VALUES (2,'Kathmandu');
+SELECT * FROM loc;
+----------------------------------------------------------------------------------------------
+ create table audit_table(
+ operation  varchar2(30),   
+ table_name varchar2(30),
+ column_name varchar2(30),
+ old_value varchar2(30), 
+ new_value varchar2(30),
+ upd_time varchar2(30),
+ mod_user_id varchar2(30));
+--------------------------------------------------------------------------------------------------------------------------
+create or replace trigger aduit_emp
+after update on emp
+REFERENCING NEW AS NEW OLD AS OLD FOR EACH ROW
+begin
+
+    if (UPDATING ( 'emp_id' )) then --col 1
+        insert into audit_table values ('U', 'emp','emp_id', :old.emp_id, :new.emp_id, sysdate, user);
+    end if;
+    if (UPDATING ( 'first_name' )) then --col 2
+        insert into audit_table values ('U', 'emp','first_name', :old.first_name, :new.first_name, sysdate, user);
+    end if;
+    if (UPDATING ( 'last_name' )) then --col 3
+        insert into audit_table values ('U', 'emp','last_name', :old.last_name, :new.last_name, sysdate, user);
+    end if;
+
+end;
+/
+ ---------------------------------------------------------------------------------------------------------------------
+create or replace trigger aduit_dept
+after update on dept
+REFERENCING NEW AS NEW OLD AS OLD FOR EACH ROW
+begin
+
+    if (UPDATING ( 'dept_id' )) then --col 1
+        insert into audit_table values ('U', 'dept','dept_id', :old.dept_id, :new.dept_id, sysdate, user);
+    end if;
+    if (UPDATING ( 'dept_name' )) then --col 2
+        insert into audit_table values ('U', 'dept','dept_name', :old.dept_name, :new.dept_name, sysdate, user);
+    end if;
+end;
+/
+-------------------------------------------------------------------------------------------------------------------
+create or replace trigger aduit_loc
+after update on loc
+REFERENCING NEW AS NEW OLD AS OLD FOR EACH ROW
+begin
+
+    if (UPDATING ( 'loc_id' )) then --col 1
+        insert into audit_table values ('U', 'loc','loc_id', :old.loc_id, :new.loc_id, sysdate, user);
+    end if;
+    if (UPDATING ( 'loc_name' )) then --col 2
+        insert into audit_table values ('U', 'loc','loc_name', :old.loc_name, :new.loc_name, sysdate, user);
+    end if;
+end;
+/
+----------------------------------------------------------------------------------------------------------------
+
+UPDATE emp SET first_name = 'sunil' WHERE emp_id = 3;
+UPDATE emp SET last_name = 'KC' WHERE emp_id = 3;
+
+UPDATE dept SET dept_name = 'Java Team' WHERE dept_id = 2; 
+UPDATE loc SET loc_name = 'Nepalgunj' WHERE loc_id = 2;
+
+SELECT  * FROM audit_table;
